@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block CSSLink %}
+<!-- lien vers le CDN css de bootstrap x-editable : http://vitalets.github.io/x-editable-->
+<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+<!-- lien vers le CDN css de font-awesome -->
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet" />
+{% endblock %}
+
+{% block synopsis %}
+<!--    ###################### tableau synopsis #########################-->
+<table class="table text-left">
+    <thead>
+        <tr>
+            <th>ADIS Channel</th>
+            <th>ATA</th>
+            <th>ADIS Target</th>
+            <th>AAS Name</th>
+            <th>FIN</th>
+            <th>Design Office Contact</th>
+            <th>IPR</th>
+            <th>MC</th>
+            <th>STIMULI</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ligne in tab1 %}
+            <tr class="{{ligne.id_synopsis}}">
+                <td>{{ ligne.ADIS_Channel }}</td>
+                <td>{{ ligne.ATA }}</td>
+                <td>{{ ligne.ADIS_Target }}</td>
+                <td>{{ ligne.AAS_Name }}</td>
+                <td>{{ ligne.FIN }}</td>
+                <td>{{ ligne.Design_Office_Contact }}</td>
+                <td class="modif" data-type="select" data-pk="{{ligne.id_synopsis}}" data-url="{{ url_for('update_test')}}" data-name="IPR">{{ ligne.IPR }}</td>
+                <td class="modif" data-type="select" data-pk="{{ligne.id_synopsis}}" data-url="{{ url_for('update_test')}}" data-name="MC">{{ ligne.MC }}</td>
+                <td class="modif" data-type="select" data-pk="{{ligne.id_synopsis}}" data-url="{{ url_for('update_test')}}" data-name="STIMULI">{{ ligne.STIMULI }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% block JSLink %}
+
+<!-- lien vers le CDN js de bootstrap x-editable : http://vitalets.github.io/x-editable-->
+<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+<script src="../static/js/test.js"></script>
+
+<script>
+ jQuery(function ($) {
+     /*gestion du menu actif*/
+     $('ul.nav li').removeClass('active');
+     $('ul.nav li:nth-child(1)').addClass('active');
+ });
+    </script>
+{% endblock %}
